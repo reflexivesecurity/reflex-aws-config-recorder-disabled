@@ -3,6 +3,7 @@
 import json
 
 import boto3
+import botocore
 from reflex_core import AWSRule, subscription_confirmation
 
 

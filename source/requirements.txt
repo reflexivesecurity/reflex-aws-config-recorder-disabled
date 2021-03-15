@@ -1,2 +1,3 @@
 reflex-core
+botocore
 boto3
