@@ -35,9 +35,15 @@ class ConfigRecorderDisabled(AWSRule):
             if not configuration_status["ConfigurationRecordersStatus"][0]["recording"]:
                 self.config_recorder_status = "disabled"
                 return False
-        except botocore.errorfactory.NoSuchConfigurationRecorderException:
-            self.config_recorder_status = "deleted"
-            return False
+        except botocore.exceptions.ClientError as error:
+            if (
+                error.response["Error"]["Code"]
+                == "NoSuchConfigurationRecorderException"
+            ):
+                self.config_recorder_status = "deleted"
+                return False
+            else:
+                raise
         return True
 
     def get_remediation_message(self):
