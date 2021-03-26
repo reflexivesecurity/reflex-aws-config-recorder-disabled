@@ -30,7 +30,7 @@ class ConfigRecorderDisabled(AWSRule):
         """
         try:
             configuration_status = self.client.describe_configuration_recorder_status(
-                ConfigurationRecorderName=[self.config_recorder_name]
+                ConfigurationRecorderNames=[self.config_recorder_name]
             )
             if not configuration_status["ConfigurationRecordersStatus"][0]["recording"]:
                 self.config_recorder_status = "disabled"
