@@ -42,8 +42,7 @@ class ConfigRecorderDisabled(AWSRule):
             ):
                 self.config_recorder_status = "deleted"
                 return False
-            else:
-                raise
+            raise
         return True
 
     def get_remediation_message(self):
